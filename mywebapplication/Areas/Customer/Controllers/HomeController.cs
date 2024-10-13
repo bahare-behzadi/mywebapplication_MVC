@@ -26,12 +26,7 @@ namespace MyWebApplication.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var user = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            if (user != null)
-            {
-                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == user.Value).Count());
-            }
+            
             IEnumerable<Product> productsList = _unitOfWork.Product.GetAll(includeproperties: "Category");
             return View(productsList);
         }

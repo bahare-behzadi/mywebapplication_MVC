@@ -170,6 +170,7 @@ namespace MyWebApplication.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStripePaymentId(ShoppingCartVM.OrderHeader.OrderHeaderId, session.Id, session.PaymentIntentId);
                     _unitOfWork.OrderHeader.UpdateStatus(orderId, SD.statusApproved, SD.PaymentstatusApproved);
                     _unitOfWork.Save();
+                    HttpContext.Session.Clear();
                 }
                 List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart.GetAll(u=>u.ApplicationUserId==orderHeader.ApplicationUserId).ToList();
                 _unitOfWork.ShoppingCart.DeleteRange(shoppingCarts);
