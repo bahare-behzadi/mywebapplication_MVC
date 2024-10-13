@@ -1,0 +1,80 @@
+﻿@model Company
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Id" hidden />
+    <div class="row">
+        <h2 class="text-primary"> @(Model.Id != 0 ? "Update" : "Create") the Company</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <fieldset>
+                <div class="row pb-2">
+                    <label asp-for=Name class="form-label mt-4 p-0"></label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+@*                 <div class="row pb-2">
+                    <label asp-for=PhoneNumber class="form-label mt-4 p-0"></label>
+                    <input asp-for="PhoneNumber" class="form-control">
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div> *@
+                <div class="row pb-2">
+                    <label asp-for=StreetAdress class="form-label mt-4 p-0"></label>
+                    <input asp-for="StreetAdress" class="form-control">
+                    <span asp-validation-for="StreetAdress" class="text-danger"></span>
+                </div>
+                <div class="row pb-2">
+                    <label asp-for=City class="form-label mt-4 p-0"></label>
+                    <input asp-for="City" class="form-control"></input>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="row pb-2">
+                    <label asp-for=State class="form-label mt-4 p-0"></label>
+                    <input asp-for="State" class="form-control">
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="row pb-2">
+                    <label asp-for=PostalCode class="form-label mt-4 p-0"></label>
+                    <input asp-for="PostalCode" class="form-control">
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+        <div class="row pb-2 my-4">
+            <div class="col-6 col-md-3">
+                @if (Model.Id != 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                }
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Company" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+    </fieldset>
+    </form>
+
+@section scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists searchreplace table visualblocks wordcount checklist casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' }
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+         @{
+        <partial name="_ValidationScriptsPartial" />
+    } 
+}
